@@ -25,6 +25,7 @@ app.use(cookieParser());
 
 app.use(passport.initialize());
 app.use(routes);
+
 app.use('/csv', passport.authenticate('jwt', { session: false }), user);
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI);

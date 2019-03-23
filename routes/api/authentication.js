@@ -1,17 +1,14 @@
 const router = require("express").Router();
-const passport = require("../../config/passport");
+const authenticationController = require("../../controllers/authenticationController");
 
-// Matches with "/api/example"
-router.route("/login")
-    .post(
-        function (req, res) {
-            passport.authenticate("local", {
-                successRedirect: '/csv',
-                failureRedirect: '/login'
-            });
-        }
-    )
+// Matches with "/api/authentication/login"
+router
+    .route("/login")
+    .post(authenticationController.login);
 
-// Matches with "/api/example/:id"
+// Matches with "/api/authentication/register"
+router
+    .route("/register")
+    .post(authenticationController.register);
 
 module.exports = router;

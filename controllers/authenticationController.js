@@ -1,37 +1,83 @@
+const db = require("../models");
 const express = require('express');
-const router = express.Router();
-
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-const JWT_SECRET = process.env.JWT_SECRET || "key";
 
-/* POST login. */ // Matches with "/api/login"
-router.post('/', function (req, res, next) {
+// const JWT_SECRET = process.env.JWT_SECRET || "key";
+// const router = express.Router();
 
-    passport.authenticate('local', { session: false }, (err, user, info) => {
-        console.log(err);
-        if (err || !user) {
-            return res.status(400).json({
-                message: info ? info.message : 'Login failed',
-                user: user
-            });
-        }
-
-        req.login(user, { session: false }, (err) => {
-            if (err) {
-                res.send(err);
+module.exports = {
+    login: function (req, res) {
+        // We tell passport to run the local strategy for user login
+        passport.authenticate("local", { session: false }, (err, user, info) => {
+            if (err || !user) {
+                return res.status(400).json({
+                    message: info,
+                    user: user
+                });
             }
 
-            const token = jwt.sign(user.toJSON(), JWT_SECRET);
-            // sessionStorage.setItem('token', token);
+            // After a successful login, we serialize the user into a JSON web token and send it back
+            // to the client
+            const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET);
             return res.json({ user, token });
-        });
-    })
-        (req, res);
-});
+        })(req, res);
+    },
+    register: function (req, res) {
+        db.User
+            .create(req.body)
+            .then(user => {
+                if (!user) {
+                    return res.status(400).json({
+                        message: "Something went wrong",
+                        user: user
+                    });
+                }
+
+                // After a successful register, we serialize the user into a JSON web token and send it back
+                // to the client
+                const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET);
+                return res.json({ user, token });
+            })
+            .catch(err => {
+                res.status(422).json(err)
+            });
+    }
+};
 
 
-module.exports = router;
+//--------------------------Segundo Intento-----------------------------------//
+
+// /* POST login. */ // Matches with "/api/login"
+// router.post('/', function (req, res, next) {
+
+//     passport.authenticate('local', { session: false }, (err, user, info) => {
+//         console.log(err);
+//         if (err || !user) {
+//             return res.status(400).json({
+//                 message: info ? info.message : 'Login failed',
+//                 user: user
+//             });
+//         }
+
+//         req.login(user, { session: false }, (err) => {
+//             if (err) {
+//                 res.send(err);
+//             }
+
+//             const token = jwt.sign(user.toJSON(), JWT_SECRET);
+//             // sessionStorage.setItem('token', token);
+//             return res.json({ user, token });
+//         });
+//     })
+//         (req, res);
+
+// });
+
+
+// module.exports = router;
+
+//---------------------Primer Intento------------------------------//
 
 // const express = require("express");
 // const router = express.Router();

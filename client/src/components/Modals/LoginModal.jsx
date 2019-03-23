@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withRouter } from 'react-router-dom';
 import avatar from "../../img/img_avatar2.png";
 import API from "../../utils/API";
+import Store from "../../utils/Store";
 
 
 class LoginModal extends React.Component {
@@ -54,11 +55,10 @@ class LoginModal extends React.Component {
                 password: this.state.password
             })
                 .then((response) => {
+                    Store.set("userData", response.data);
                     this.props.history.push('/userIndex');
                     this.props.closeModal();
-                }
-
-                )
+                })
                 .catch(err => console.log(err));
         }
     };
@@ -74,7 +74,7 @@ class LoginModal extends React.Component {
             return false;
         }
 
-        
+
 
         // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
         // alert(`Hello ${this.state.firstName} ${this.state.lastName}`);
