@@ -34,7 +34,7 @@ class Navbar extends React.Component {
               this.toggleModal("showLoginModal");
             }}
           >
-            Log in
+            Log&nbsp;in
           </button>
           <button
             className="signin-btn"
@@ -42,7 +42,7 @@ class Navbar extends React.Component {
               this.toggleModal("showSigninModal");
             }}
           >
-            Sign in
+            Sign&nbsp;in
           </button>
         </div>
         {this.state.showLoginModal ? (

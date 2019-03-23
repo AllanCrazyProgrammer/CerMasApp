@@ -8,10 +8,11 @@ import Carousel from "../components/Carousel/Carousel";
 class Home extends Component {
   render() {
     return (
-      <div className="container">
-        <div className="carousel-container">{/* <Carousel1 />*/}</div>
-        <Carousel />
-        <Plans />
+      <div className="Home" style={{ paddingTop: "9%" }}>
+        <div className="carousel-container">
+          <Carousel />
+          <Plans />
+        </div>
       </div>
     );
   }
