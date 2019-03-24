@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
 import API from "../utils/API"
-import ButtonCheckbox from "../components/buttonCheckbox"
 import Table from 'react-bootstrap/Table'
 import EditModal from "../components/editModal"
 
 class AllAlumnos extends Component {
     state = {
-        alumnos: []
+        items: []
     }
 
     componentDidMount() {
-        this.loadAlumnos();
+        this.loadItems();
+        console.log(this.state)
     }
 
-    loadAlumnos = () => {
-        API.getAlumnos()
+    loadItems = () => {
+        API.getCSV()
             .then(res => {
+                console.table(res)
+                var fieldsData = res.data[2].data
                 this.setState({
-                    alumnos: res.data
+                    items: fieldsData
+
                 })
+                console.log(this.state)
             })
             .catch(err =>
 
@@ -33,12 +37,24 @@ class AllAlumnos extends Component {
 
 
     render() {
+        var myObject = this.state.items
+        console.log(this.state)
         return (
             <container fluid>
                 <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
+                            {
+
+                                Object.keys(myObject).map(function (key) {
+                                    myObject[key] *= 2;
+                                    // console.log(myObject);
+
+
+                                })
+
+                            }
+                            <th>this.state.items</th>
                             <th>Edad</th>
                             <th>Direccion</th>
                             <th>Curp</th>
@@ -47,23 +63,23 @@ class AllAlumnos extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            this.state.alumnos.map(alumno => {
-                                const id = alumno._id;
+                        {/* {
+                            this.state.items.map(item => {
+                                const id = item._id;
                                 return (
                                     <tr key={id}>
-                                        <td>{alumno.alumno}</td>
-                                        <td>{alumno.edad}</td>
-                                        <td>{alumno.direccion}</td>
-                                        <td>{alumno.curp}</td>
-                                        <td>{alumno.enfermedad}</td>
+                                        <td>{item.price}</td>
+                                        <td>{item.price}</td>
+                                        <td>{item.price}</td>
+                                        <td>{item.price}</td>
+                                        <td>{item.price}</td>
                                         <td>
                                             <EditModal id={id} />
                                         </td>
                                     </tr>
                                 )
                             })
-                        }
+                        } */}
                     </tbody>
                 </Table>;
 
