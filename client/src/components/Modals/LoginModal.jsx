@@ -24,28 +24,28 @@ class LoginModal extends React.Component {
   }
 
 
-    handleFormSubmit = event => {
-        // Preventing the default behavior of the form submit (which is to refresh the page)
-        event.preventDefault();
+  handleFormSubmit = event => {
+    // Preventing the default behavior of the form submit (which is to refresh the page)
+    event.preventDefault();
 
-        const email = this.state.email.trim();
-        const password = this.state.password.trim();
+    const email = this.state.email.trim();
+    const password = this.state.password.trim();
 
 
-        if (this.areInputsValid(email, password)) {
-            // console.log(this.state);
-            API.login({
-                email: this.state.email,
-                password: this.state.password
-            })
-                .then((response) => {
-                    Store.set("userData", response.data);
-                    this.props.history.push('/userIndex');
-                    this.props.closeModal();
-                })
-                .catch(err => console.log(err));
-        }
-    };
+    if (this.areInputsValid(email, password)) {
+      // console.log(this.state);
+      API.login({
+        email: this.state.email,
+        password: this.state.password
+      })
+        .then((response) => {
+          Store.set("userData", response.data);
+          this.props.history.push('/userIndex');
+          this.props.closeModal();
+        })
+        .catch(err => console.log(err));
+    }
+  };
 
   // Handles updating component state when the user types into the input field
   handleInputChange = event => {

@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import Papa from "papaparse";
 import "../../styles/CSV.css";
 import API from "../../utils/API";
+import Store from "../../utils/Store";
 
 class FileReader extends Component {
   constructor() {
@@ -30,8 +31,13 @@ class FileReader extends Component {
   };
 
   updateData(result) {
-    var data = result.data;
-    console.log(data);
+    var data = {};
+    data.userId = Store.get("userData").user._id;
+    console.log(data.userId);
+    data.csv = result.data;
+    // console.log(data.csv);
+    // var data = result.data;
+    // console.log(data);
     API.saveCSV({
       data
     }).then(() => {

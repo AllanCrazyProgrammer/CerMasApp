@@ -1,4 +1,5 @@
 const db = require("../models");
+var mongodb = require("mongodb");
 
 module.exports = {
   findAll: function (req, res) {
@@ -8,10 +9,12 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
+    console.log(req.body.data.userId)
     db.Csv
-      .create(req.body)
-      .then(dbModel => {
-        return db.User.findOneAndUpdate({}, { $push: { tables: dbModel._id } }, { new: true });
+      .create(req.body.data)
+      .then(function (dbCsv) {
+        console.log(dbCsv)
+        return db.User.findOneAndUpdate({ _id: req.body.data.userId }, { $push: { tables: dbCsv._id } }, { new: true });
         // return db.User.findOneAndUpdate({ email: req.user.email }, { $push: { tables: dbModel._id } }, { new: true });
       })
       .catch(function (err) {
