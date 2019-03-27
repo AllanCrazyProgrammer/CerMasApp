@@ -30,6 +30,11 @@ export default {
     return axios.post("/api/userIndex", csvData);
   },
 
+  getOneCSV: function (id) {
+    return axios.get("/api/userIndex/" + id);
+
+  },
+
   getCSV: function (csvData) {
     return axios.get("/api/userIndex", csvData);
   },

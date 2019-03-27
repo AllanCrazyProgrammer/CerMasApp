@@ -7,8 +7,7 @@ class AdminTools extends Component {
     render() {
         return (
             <>
-                <NavButtons/>
-            
+                <NavButtons />
             </>
         );
     }

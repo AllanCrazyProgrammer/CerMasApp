@@ -43,7 +43,7 @@ class EditModal extends React.Component {
 
     loadAlumno = () => {
 
-        API.getOneAlumno(this.props.id)
+        API.getOneCSV(this.props.id)
             .then(res => {
                 this.setState({
                     alumno: res.data.alumno,
