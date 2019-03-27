@@ -1,11 +1,12 @@
 import React from "react";
 import "../../styles/plans.css";
+import Card from "react-bootstrap/Card";
 
 class Plans extends React.Component {
   render() {
     return (
       <div className="plans-container">
-        <div className="card">
+        <Card body>
           <div className="container1">
             <h4>
               <b>Starter</b>
@@ -22,9 +23,8 @@ class Plans extends React.Component {
             <hr />
             <div className="plan-btn">SIGN UP NOW</div>
           </div>
-        </div>
-
-        <div className="card">
+        </Card>
+        <Card body>
           <div className="container2">
             <h4>
               <b>PROFESSIONAL</b>
@@ -42,9 +42,8 @@ class Plans extends React.Component {
             <hr />
             <div className="plan-btn">SIGN UP NOW</div>
           </div>
-        </div>
-
-        <div className="card">
+        </Card>
+        <Card body>
           <div className="container3">
             <h4>
               <b>PREMIUM</b>
@@ -62,7 +61,7 @@ class Plans extends React.Component {
             <hr />
             <div className="plan-btn">SIGN UP NOW</div>
           </div>
-        </div>
+        </Card>
       </div>
     );
   }

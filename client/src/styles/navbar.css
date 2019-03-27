@@ -55,6 +55,19 @@
   padding-right: 1%;
 }
 
+.signout-btn {
+  background-color: #38383d;
+  border: none;
+  color: #d1d2d4;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+  padding: 0.4rem;
+  padding-right: 1%;
+  display: flex;
+  z-index: 1;
+}
+
 .nav-btns {
   display: flex;
   z-index: 1;
@@ -75,7 +88,7 @@ input[type="password"] {
 }
 
 /* Set a style for all buttons */
-button {
+.modalbtn {
   background-color: #f05a28;
   color: white;
   padding: 2%;
@@ -86,7 +99,7 @@ button {
   border-radius: 0.3rem;
 }
 
-button:hover {
+.modalbtn:hover {
   opacity: 0.8;
 }
 
@@ -97,6 +110,14 @@ button:hover {
   margin-right: 2%;
   background-color: #d32d21;
   float: right;
+  color: white;
+  border-radius: 0.3rem;
+  border: none;
+  cursor: pointer;
+}
+
+.cancelbtn:hover {
+  box-shadow: 0 0 6px rgb(231, 14, 6);
 }
 
 .cancel-container {

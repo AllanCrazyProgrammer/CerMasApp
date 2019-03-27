@@ -133,7 +133,9 @@ class SigninModal extends React.Component {
                 placeholder="password"
               />
 
-              <button type="submit">Register</button>
+              <button className="modalbtn" type="submit">
+                Sign In
+              </button>
             </div>
 
             <div className="cancel-container">
