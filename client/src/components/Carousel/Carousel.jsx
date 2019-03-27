@@ -1,6 +1,5 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
-import Container from "react-bootstrap/Container";
 import Image1 from "../../img/car-1.jpg";
 import Image2 from "../../img/car-2.jpg";
 import Image3 from "../../img/car-3.jpg";
@@ -9,7 +8,7 @@ import "../../styles/Carousel.css";
 class CustomCarousel extends React.Component {
   render() {
     return (
-      <Container>
+      <div>
         <Carousel>
           <Carousel.Item>
             <img
@@ -53,7 +52,7 @@ class CustomCarousel extends React.Component {
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
-      </Container>
+      </div>
     );
   }
 }
