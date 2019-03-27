@@ -55,12 +55,12 @@ export default {
     return axios.get(`/api/authenticate/${id}`);
   },
 
-  // login: function (userData) {
-  //   return axios.post("/api/authenticate", userData);
-  // },
-
-  login: function (userData) {
-    return axios.post("/api/login", userData);
+  register: function (registerData) {
+    return axios.post("/api/authentication/register", registerData);
   },
+
+  login: function (loginData) {
+    return axios.post("/api/authentication/login", loginData);
+  }
 
 };
