@@ -7,21 +7,16 @@ import API from "../utils/API"
 
 
 class AddModal extends React.Component {
-
+    state = {
+        items: []
+    };
     constructor(props, context) {
         super(props, context);
 
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
 
-        this.state = {
-            show: false,
-            alumno: "",
-            edad: undefined,
-            direccion: "",
-            curp: undefined,
-            enfermedad: ""
-        };
+
     }
 
     handleClose() {
@@ -45,6 +40,27 @@ class AddModal extends React.Component {
         window.location.reload(true);
     }
 
+    componentDidMount() {
+        this.loadItems();
+    }
+
+    loadItems = () => {
+        API.getCSV()
+            .then(res => {
+                console.log(res.data.length)
+                var fieldsData = res.data[res.data.length - 1].data
+                this.setState({
+                    items: fieldsData
+
+                })
+                console.log(this.state)
+            })
+            .catch(err =>
+
+                console.log("FALLANDO" + err));
+    };
+
+
 
     postAlumnos = () => {
         var alumno = this.state.alumno
@@ -52,6 +68,9 @@ class AddModal extends React.Component {
         var direccion = this.state.direccion
         var curp = this.state.curp
         var enfermedad = this.state.enfermedad
+
+
+
 
         API.saveAlumno({ ...this.state })
             .then(res => {
@@ -69,6 +88,14 @@ class AddModal extends React.Component {
     };
 
     render() {
+        var keys = [];
+
+        if (this.state.items && this.state.items.length > 0) {
+            keys = Object.keys(this.state.items[0]);
+            console.log(keys)
+
+        }
+
         return (
             <>
                 <Button variant="primary" onClick={this.handleShow}>
@@ -82,6 +109,25 @@ class AddModal extends React.Component {
 
                     <Modal.Body>
                         <Form>
+
+
+                            {
+
+                                keys.map(function (key) {
+                                    const formRows = keys.map(function (key) {
+                                        return (
+                                            <>
+                                                <Form.Label key={key}>{key}</Form.Label>
+                                                <Form.Control value="" type="input" placeholder={key} name={key} />
+                                            </>
+                                        )
+
+                                    });
+
+                                    return <Form.Group >{formRows}</Form.Group >
+                                })
+                            }
+                            {/* 
                             <Form.Group controlId="formGroupEmail">
                                 <Form.Label>Nombre</Form.Label>
                                 <Form.Control value={this.state.alumno} type="input" placeholder="Enter email" onChange={this.onChange} name="alumno" />
@@ -101,21 +147,21 @@ class AddModal extends React.Component {
                             <Form.Group controlId="formGroupPassword">
                                 <Form.Label>Enfermedad</Form.Label>
                                 <Form.Control value={this.state.enfermedad} type="input" placeholder="Enfermedad" onChange={this.onChange} name="enfermedad" />
-                            </Form.Group>
+                            </Form.Group> */}
 
                         </Form>
 
                     </Modal.Body>
 
 
-                    <Modal.Footer>
+                    {/* <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>
                             Close
                         </Button>
                         <Button variant="primary" onClick={this.newUser}>
                             Save Changes
                     </Button>
-                    </Modal.Footer>
+                    </Modal.Footer> */}
 
                 </Modal>
             </>
