@@ -36,9 +36,9 @@ class LoginModal extends React.Component {
         email: this.state.email,
         password: this.state.password
       })
-        .then(response => {
+        .then((response) => {
           Store.set("userData", response.data);
-          this.props.history.push("/userIndex");
+          this.props.history.push('/userIndex');
           this.props.closeModal();
         })
         .catch(err => console.log(err));
