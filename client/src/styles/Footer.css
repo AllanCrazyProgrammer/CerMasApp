@@ -1,17 +1,6 @@
-.footer {
-  /*background-image: url(../img/footer.png);*/
-  width: 100%;
-  padding-left: 0%;
-  padding-right: 0%;
-  height: 8.5rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  position: fixed;
-  z-index: 0;
-}
-
 .footer-img {
   width: 100%;
+  z-index: 0;
 }
 .contact {
   display: flex;

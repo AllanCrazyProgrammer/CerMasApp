@@ -9,7 +9,11 @@ class Store {
   }
 
   static get(key) {
-    return JSON.parse(localStorage.getItem(key));
+    const value = JSON.parse(localStorage.getItem(key));
+    if (!value) {
+      return {};
+    }
+    return value;
   }
 }
 

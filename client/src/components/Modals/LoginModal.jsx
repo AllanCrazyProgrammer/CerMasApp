@@ -23,14 +23,12 @@ class LoginModal extends React.Component {
     };
   }
 
-
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
 
     const email = this.state.email.trim();
     const password = this.state.password.trim();
-
 
     if (this.areInputsValid(email, password)) {
       // console.log(this.state);
@@ -57,7 +55,6 @@ class LoginModal extends React.Component {
       return;
     }
 
-
     // Updating the input's state
     this.setState({
       [name]: value
@@ -69,7 +66,6 @@ class LoginModal extends React.Component {
       alert("Please fill out the email fields");
       return false;
     }
-
 
     // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
     // alert(`Hello ${this.state.firstName} ${this.state.lastName}`);
@@ -118,7 +114,9 @@ class LoginModal extends React.Component {
                 type="password"
                 placeholder="password"
               />
-              <button type="submit">Login</button>
+              <button className="modalbtn" type="submit">
+                Login
+              </button>
             </div>
 
             <div className="cancel-container">

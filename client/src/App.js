@@ -11,9 +11,9 @@ import NoMatch from "./pages/NoMatch";
 import Signup from "./pages/signupForm.js";
 import Login from "./pages/loginForm.js";
 import UserIndex from "./components/UserIndex";
-import AdminTools from "./components/AdminFunctions/adminTools"
+import AdminTools from "./components/AdminFunctions/adminTools";
+import OnlineStore from "./components/StoreSetup";
 import "./App.css";
-
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
             <Route path="/signup" component={Signup} />
             <Route path="/userIndex" component={UserIndex} />
             <Route path="/userIndex/tools" component={AdminTools} />
-
+            <Route path="/userIndex/products" component={OnlineStore} />
             <Route component={NoMatch} />
           </Switch>
           <Foot />
