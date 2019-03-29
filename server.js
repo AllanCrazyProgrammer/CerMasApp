@@ -2,15 +2,23 @@ require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 
+const ejs = require("ejs");
+
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT;
 const app = express();
+
 var user = require('./routes/api/user');
 const routes = require("./routes");
 const passport = require("./config/passport");
+
+app.set("view engine", "ejs");
+// app.get("/checkout", (req, res) => res.render("checkout"));
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

@@ -38,6 +38,21 @@ class Products extends React.Component {
     }
   };
 
+  handleFormPaypal = event => {
+    // Preventing the default behavior of the form submit (which is to refresh the page)
+    event.preventDefault();
+
+    if (this.areInputsValid()) {
+      // console.log(this.state);
+      API.checkout({})
+        .then((response) => {
+          this.props.history.push('/userIndex');
+          this.props.closeModal();
+        })
+        .catch(err => console.log(err));
+    }
+  };
+
   render() {
     return (
       <div className="card">
@@ -63,6 +78,11 @@ class Products extends React.Component {
             </li>
             <li>
               <strong>Manufacturer:</strong> {this.props.manufacturer}
+            </li>
+            <li>
+              <form action="/paypal" method="post">
+                <input type="submit" value="Buy" className="buy-btn" onClick={this.props.handleFormPaypal}></input>
+              </form>
             </li>
           </ul>
         </div>

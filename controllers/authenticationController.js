@@ -2,6 +2,7 @@ const db = require("../models");
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+const router = require("express").Router();
 
 // const JWT_SECRET = process.env.JWT_SECRET || "key";
 // const router = express.Router();
@@ -42,6 +43,10 @@ module.exports = {
             .catch(err => {
                 res.status(422).json(err)
             });
+    },
+    logout: function (req, res) {
+        req.logout();
+        res.redirect("/");
     }
 };
 

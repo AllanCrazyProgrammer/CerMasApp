@@ -11,4 +11,9 @@ router
     .route("/register")
     .post(authenticationController.register);
 
+// Matches with "/api/authentication/register"
+router
+    .route("/logout")
+    .get(authenticationController.logout);
+
 module.exports = router;

@@ -4,7 +4,9 @@ import bar from "../../img/navbar.png";
 import logo from "../../img/logo.png";
 import LoginModal from "../Modals/LoginModal";
 import SigninModal from "../Modals/SigninModal";
+import API from "../../utils/API";
 import Store from "../../utils/Store";
+import { withRouter } from "react-router-dom";
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -14,6 +16,17 @@ class Navbar extends React.Component {
       showLoginModal: false,
       showSigninModal: false
     };
+  }
+
+  handleFormLogout = () => {
+    console.log("login out ");
+    API.logout()
+      .then((response) => {
+        console.log("logs out " + response);
+        Store.remove("userData");
+        this.props.history.push('/');
+      })
+      .catch(err => console.log(err));
   }
 
   toggleModal = modal => {
@@ -49,8 +62,12 @@ class Navbar extends React.Component {
             </button>
           </div>
         ) : (
-          <button className="signout-btn">Sign&nbsp;Out</button>
-        )}
+            <button
+              className="signout-btn"
+              onClick={this.handleFormLogout}
+            >Sign&nbsp;Out
+          </button>
+          )}
 
         {this.state.showLoginModal ? (
           <LoginModal
@@ -71,4 +88,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+export default withRouter(Navbar);
