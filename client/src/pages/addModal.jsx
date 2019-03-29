@@ -92,9 +92,19 @@ class AddModal extends React.Component {
 
         if (this.state.items && this.state.items.length > 0) {
             keys = Object.keys(this.state.items[0]);
-            console.log(keys)
 
         }
+
+        const formRows = keys.map(key => {
+            console.log(key)
+            return (
+                <>
+                    <Form.Label key={key}>{key}</Form.Label>
+                    <Form.Control value={key} onChange={this.onChange} type="input" placeholder={key} name={key} />
+                </>
+            )
+        });
+
 
         return (
             <>
@@ -108,61 +118,21 @@ class AddModal extends React.Component {
 
 
                     <Modal.Body>
-                        <Form>
-
-
-                            {
-
-                                keys.map(function (key) {
-                                    const formRows = keys.map(function (key) {
-                                        return (
-                                            <>
-                                                <Form.Label key={key}>{key}</Form.Label>
-                                                <Form.Control value={key} type="input" placeholder={key} name={key} />
-
-                                            </>
-                                        )
-
-                                    });
-
-                                    return <Form.Group >{formRows}</Form.Group >
-                                })
-                            }
-                            {/* 
-                            <Form.Group controlId="formGroupEmail">
-                                <Form.Label>Nombre</Form.Label>
-                                <Form.Control value={this.state.alumno} type="input" placeholder="Enter email" onChange={this.onChange} name="alumno" />
-                            </Form.Group>
-                            <Form.Group controlId="formGroupPassword">
-                                <Form.Label>Edad</Form.Label>
-                                <Form.Control value={this.state.edad} type="input" placeholder="Edad" onChange={this.onChange} name="edad" />
-                            </Form.Group>
-                            <Form.Group controlId="formGroupPassword">
-                                <Form.Label>Direccion</Form.Label>
-                                <Form.Control value={this.state.direccion} type="input" placeholder="Edad" onChange={this.onChange} name="direccion" />
-                            </Form.Group>
-                            <Form.Group controlId="formGroupPassword">
-                                <Form.Label>Curp</Form.Label>
-                                <Form.Control value={this.state.curp} type="input" placeholder="Curp" onChange={this.onChange} name="curp" />
-                            </Form.Group>
-                            <Form.Group controlId="formGroupPassword">
-                                <Form.Label>Enfermedad</Form.Label>
-                                <Form.Control value={this.state.enfermedad} type="input" placeholder="Enfermedad" onChange={this.onChange} name="enfermedad" />
-                            </Form.Group> */}
-
+                        <Form  >
+                            <Form.Group >{formRows}</Form.Group >
                         </Form>
 
                     </Modal.Body>
 
 
-                    {/* <Modal.Footer>
+                    <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>
                             Close
                         </Button>
                         <Button variant="primary" onClick={this.newUser}>
                             Save Changes
                     </Button>
-                    </Modal.Footer> */}
+                    </Modal.Footer>
 
                 </Modal>
             </>

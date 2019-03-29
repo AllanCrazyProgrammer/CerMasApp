@@ -10,7 +10,6 @@ class AllAlumnos extends Component {
 
     componentDidMount() {
         this.loadItems();
-        console.log(this.state)
     }
 
     loadItems = () => {
@@ -22,7 +21,6 @@ class AllAlumnos extends Component {
                     items: fieldsData
 
                 })
-                console.log(this.state)
             })
             .catch(err =>
 
@@ -30,7 +28,6 @@ class AllAlumnos extends Component {
     };
 
     onEditClick = id => {
-        console.log(id)
         // this.props.history.push(`/${id}`);
     }
 
@@ -43,7 +40,6 @@ class AllAlumnos extends Component {
             console.log(values)
 
         }
-        console.log(this.state.items)
 
         return (
             <container fluid>
