@@ -15,6 +15,10 @@ class Store {
     }
     return value;
   }
+
+  static remove(key) {
+    return localStorage.removeItem(key);
+  }
 }
 
 export default Store;
