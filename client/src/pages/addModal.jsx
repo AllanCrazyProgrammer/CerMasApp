@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import API from "../utils/API"
-
+import modalCss from "./"
 
 
 class AddModal extends React.Component {
