@@ -111,6 +111,24 @@ class SigninModal extends React.Component {
                 type="text"
                 placeholder="Last Name"
               />
+
+              <label htmlFor="plan">
+                <b>Type of Plan</b>
+              </label>
+              <br />
+              {/* <input
+                value={this.state.plan}
+                name="plan"
+                onChange={this.handleInputChange}
+                type="radio"
+                value="Free"
+             />*/}
+              <select name="plan">
+                <option value="free">Free</option>
+                <option value="comercial">Comercial</option>
+              </select>
+              <br />
+
               <label htmlFor="email">
                 <b>User Name</b>
               </label>

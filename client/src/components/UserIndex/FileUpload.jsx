@@ -52,35 +52,93 @@ class FileReader extends Component {
   }
 
   render() {
+    const { token } = Store.get("userData");
+    //--------------FETCH FROM STORAGE TYPE OF PLAN------------------------
+    //const { plantype } = Store.get("userData").user.plantype;
     return (
       <div className="containerUI">
         <div className="cardCSV">
-          <div className="containerCSV">
-            <h2>Import .CSV File!</h2>
-            <h4>
-              <b>Select your file</b>
-            </h4>
-            <hr />
-            <p>
-              Remember that CER+ depends on the reliability of your .CSV to work
-              correctly.
-            </p>
-            <input
-              className="csv-input"
-              type="file"
-              ref={input => {
-                this.filesInput = input;
-              }}
-              name="file"
-              placeholder={null}
-              onChange={this.handleChange}
-            />
-            <p />
-            <button className="CSV-btn" onClick={this.importCSV}>
-              {" "}
-              Upload now!
-            </button>
-          </div>
+          {token ? (
+            //------------------------FREE CSV CONTAINER-----------------------
+            <div className="containerCSV">
+              <h2>Import .CSV File!</h2>
+              <h4>
+                <b>Select your file</b>
+              </h4>
+              <hr />
+              <p>
+                Remember that CER+ depends on the reliability of your .CSV to
+                work correctly.
+              </p>
+              <input
+                className="csv-input"
+                type="file"
+                ref={input => {
+                  this.filesInput = input;
+                }}
+                name="file"
+                placeholder={null}
+                onChange={this.handleChange}
+              />
+              <p />
+              <button className="CSV-btn" onClick={this.importCSV}>
+                {" "}
+                Upload now!
+              </button>
+            </div>
+          ) : (
+            //------------------------COMERCIAL CSV CONTAINER-----------------------
+            <div class="containerCSV">
+              <h2>Import .CSV File!</h2>
+              <h4>
+                <b>Select your file</b>
+              </h4>
+              <hr />
+              <p>
+                Remember that CER+ depends on the reliability of your .CSV to
+                work correctly.
+              </p>
+              {/*------------------------NORMAL CSV CONTAINER-----------------------*/}
+              <div class="firstCSV">
+                <p>Submit any .csv file for administration</p>
+                <input
+                  className="csv-input"
+                  type="file"
+                  ref={input => {
+                    this.filesInput = input;
+                  }}
+                  name="file"
+                  placeholder={null}
+                  onChange={this.handleChange}
+                />
+                <p />
+                <button className="CSV-btn" onClick={this.importCSV}>
+                  {" "}
+                  Upload now!
+                </button>
+              </div>
+
+              {/*------------------------PRODUCT CSV CONTAINER-----------------------*/}
+              <div class="productCSV">
+                <p>Submit your .csv product file for administration</p>
+                <input
+                  className="csv-input"
+                  type="file"
+                  ref={input => {
+                    this.filesInput = input;
+                  }}
+                  name="file"
+                  placeholder={null}
+                  onChange={this.handleChange}
+                />
+                <p />
+                <button className="CSV-btn" onClick={this.importCSV}>
+                  {" "}
+                  Upload now!
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
