@@ -118,7 +118,8 @@ class AddModal extends React.Component {
                                         return (
                                             <>
                                                 <Form.Label key={key}>{key}</Form.Label>
-                                                <Form.Control value="" type="input" placeholder={key} name={key} />
+                                                <Form.Control value={key} type="input" placeholder={key} name={key} />
+
                                             </>
                                         )
 
