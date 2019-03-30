@@ -5,8 +5,11 @@ import Form from 'react-bootstrap/Form';
 import API from "../utils/API"
 
 
-
 class AddModal extends React.Component {
+    state = {
+        items: []
+    };
+
 
     constructor(props, context) {
         super(props, context);
@@ -14,14 +17,7 @@ class AddModal extends React.Component {
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
 
-        this.state = {
-            show: false,
-            alumno: "",
-            edad: undefined,
-            direccion: "",
-            curp: undefined,
-            enfermedad: ""
-        };
+
     }
 
     handleClose() {
@@ -34,45 +30,85 @@ class AddModal extends React.Component {
 
     onChange = (event) => {
         this.setState({
-            [event.target.name]: event.target.value
+            value: event.target.value
         });
     }
 
-    newUser = () => {
 
+
+    newUser = (e) => {
+        e.preventDefault()
         this.postAlumnos()
         this.handleClose()
-        window.location.reload(true);
+        // window.location.reload(true);
     }
 
+    componentDidMount() {
+        this.loadItems();
+    }
 
-    postAlumnos = () => {
-        var alumno = this.state.alumno
-        var edad = this.state.edad
-        var direccion = this.state.direccion
-        var curp = this.state.curp
-        var enfermedad = this.state.enfermedad
-
-        API.saveAlumno({ ...this.state })
+    loadItems = () => {
+        API.getCSV()
             .then(res => {
+                console.log(res.data.length)
+                var fieldsData = res.data[res.data.length - 1].data
                 this.setState({
-                    alumno: alumno,
-                    edad: edad,
-                    direccion: direccion,
-                    curp: curp,
-                    enfermedad: enfermedad
+                    items: fieldsData
+
                 })
+                console.log(this.state)
             })
             .catch(err =>
 
                 console.log("FALLANDO" + err));
     };
 
+
+
+    postAlumnos = () => {
+        debugger;
+        var items = this.state.value
+        console.log(items)
+        API.saveCSV({ ...this.state })
+
+
+            .then(res => {
+                console.log(res.data)
+                this.setState({
+                    items: this.state.items
+
+                })
+            })
+            .catch(err =>
+
+                console.log("FALLANDO" + err));
+        console.log(items)
+
+    };
+
     render() {
+        var keys = [];
+
+        if (this.state.items && this.state.items.length > 0) {
+            keys = Object.keys(this.state.items[0]);
+
+        }
+
+        const formRows = keys.map(key => {
+            console.log(key)
+            return (
+                <>
+                    <Form.Label key={key}>{key}</Form.Label>
+                    <Form.Control onChange={this.onChange} type="input" placeholder={key} name={key} />
+                </>
+            )
+        });
+
+
         return (
             <>
                 <Button variant="primary" onClick={this.handleShow}>
-                    Add                </Button>
+                    Add </Button>
 
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
@@ -81,28 +117,8 @@ class AddModal extends React.Component {
 
 
                     <Modal.Body>
-                        <Form>
-                            <Form.Group controlId="formGroupEmail">
-                                <Form.Label>Nombre</Form.Label>
-                                <Form.Control value={this.state.alumno} type="input" placeholder="Enter email" onChange={this.onChange} name="alumno" />
-                            </Form.Group>
-                            <Form.Group controlId="formGroupPassword">
-                                <Form.Label>Edad</Form.Label>
-                                <Form.Control value={this.state.edad} type="input" placeholder="Edad" onChange={this.onChange} name="edad" />
-                            </Form.Group>
-                            <Form.Group controlId="formGroupPassword">
-                                <Form.Label>Direccion</Form.Label>
-                                <Form.Control value={this.state.direccion} type="input" placeholder="Edad" onChange={this.onChange} name="direccion" />
-                            </Form.Group>
-                            <Form.Group controlId="formGroupPassword">
-                                <Form.Label>Curp</Form.Label>
-                                <Form.Control value={this.state.curp} type="input" placeholder="Curp" onChange={this.onChange} name="curp" />
-                            </Form.Group>
-                            <Form.Group controlId="formGroupPassword">
-                                <Form.Label>Enfermedad</Form.Label>
-                                <Form.Control value={this.state.enfermedad} type="input" placeholder="Enfermedad" onChange={this.onChange} name="enfermedad" />
-                            </Form.Group>
-
+                        <Form  >
+                            <Form.Group >{formRows}</Form.Group >
                         </Form>
 
                     </Modal.Body>

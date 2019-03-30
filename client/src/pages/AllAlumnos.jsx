@@ -10,19 +10,17 @@ class AllAlumnos extends Component {
 
     componentDidMount() {
         this.loadItems();
-        console.log(this.state)
     }
 
     loadItems = () => {
         API.getCSV()
             .then(res => {
-                console.table(res)
-                var fieldsData = res.data[2].data
+                console.log(res.data.length)
+                var fieldsData = res.data[res.data.length - 1].data
                 this.setState({
                     items: fieldsData
 
                 })
-                console.log(this.state)
             })
             .catch(err =>
 
@@ -30,15 +28,19 @@ class AllAlumnos extends Component {
     };
 
     onEditClick = id => {
-        console.log(id)
         // this.props.history.push(`/${id}`);
     }
 
-
-
     render() {
-        var myObject = this.state.items
-        console.log(this.state)
+        var keys = [];
+        var values = [];
+        if (this.state.items && this.state.items.length > 0) {
+            keys = Object.keys(this.state.items[0]);
+            values = this.state.items;
+            console.log(values)
+
+        }
+
         return (
             <container fluid>
                 <Table striped bordered hover size="sm">
@@ -46,45 +48,32 @@ class AllAlumnos extends Component {
                         <tr>
                             {
 
-                                Object.keys(myObject).map(function (key) {
-                                    myObject[key] *= 2;
-                                    // console.log(myObject);
-
-
+                                keys.map(function (key) {
+                                    return <th key={key}>{key}</th>;
                                 })
 
                             }
-                            <th>this.state.items</th>
-                            <th>Edad</th>
-                            <th>Direccion</th>
-                            <th>Curp</th>
-                            <th>Enfermedad</th>
-                            <th></th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {
-                            this.state.items.map(item => {
-                                const id = item._id;
-                                return (
-                                    <tr key={id}>
-                                        <td>{item.price}</td>
-                                        <td>{item.price}</td>
-                                        <td>{item.price}</td>
-                                        <td>{item.price}</td>
-                                        <td>{item.price}</td>
-                                        <td>
-                                            <EditModal id={id} />
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                        } */}
+                        {values.map(function (value) {
+                            const valueCols = keys.map(function (key) {
+                                return <td>{value[key]}</td>
+                            });
+
+                            return <tr>{valueCols}</tr>
+                        })
+
+
+
+                        }
                     </tbody>
                 </Table>;
 
             </container>
         );
+
     }
 }
 
