@@ -12,7 +12,7 @@ router.use("/example", exampleRoutes);
 router.use("/user", userRoutes);
 router.use("/userIndex", csvRoutes);
 router.use("/authentication", authenticationRoutes);
-router.use("/userIndex/products", productsRoutes);
+router.use("/products", productsRoutes);
 router.use("/paypal", paypalRoutes);
 router.use("/table", tableRoutes);
 
