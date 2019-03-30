@@ -4,20 +4,33 @@
   text-align: center;
   background-color: #f05a28;
   color: black;
-  float: left;
   margin: 2rem;
   padding: 1rem;
+  width: 27%;
+  display: inline-block;
 }
 
 .card:hover {
-  box-shadow: 0 8px 16px 0 #ffffff;
+  box-shadow: 0 8px 16px 0 #8d8d8d;
 }
 
 .plan-btn {
   display: inline-block;
   border: 4px solid black;
   padding: 0.5rem;
-  color: black;
+  color: black !important;
+  background-color: #f05a28;
+}
+
+.plan-btn a {
+  color: black !important;
+  background-color: #f05a28;
+}
+
+.plan-btn:hover {
+  box-shadow: 0 8px 16px 0 rgb(155, 52, 5);
+  color: white !important;
+  border: 4px solid white;
 }
 
 hr {
@@ -32,4 +45,5 @@ h4 {
 
 .plans-container {
   margin: 0 auto;
+  height: auto;
 }

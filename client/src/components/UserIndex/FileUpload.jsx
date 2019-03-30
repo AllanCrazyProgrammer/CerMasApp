@@ -52,13 +52,13 @@ class FileReader extends Component {
   }
 
   render() {
-    const { token } = Store.get("userData");
     //--------------FETCH FROM STORAGE TYPE OF PLAN------------------------
-    //const { plantype } = Store.get("userData").user.plantype;
+    const planType = Store.get("userData").user.planType;
+
     return (
       <div className="containerUI">
         <div className="cardCSV">
-          {token ? (
+          {planType === "free" ? (
             //------------------------FREE CSV CONTAINER-----------------------
             <div className="containerCSV">
               <h2>Import .CSV File!</h2>
@@ -88,7 +88,7 @@ class FileReader extends Component {
             </div>
           ) : (
             //------------------------COMERCIAL CSV CONTAINER-----------------------
-            <div class="containerCSV">
+            <div className="containerCSV">
               <h2>Import .CSV File!</h2>
               <h4>
                 <b>Select your file</b>
@@ -98,8 +98,8 @@ class FileReader extends Component {
                 Remember that CER+ depends on the reliability of your .CSV to
                 work correctly.
               </p>
-              {/*------------------------NORMAL CSV CONTAINER-----------------------*/}
-              <div class="firstCSV">
+              {/*-----------------NORMAL CSV CONTAINER-------------------*/}
+              <div className="firstCSV">
                 <p>Submit any .csv file for administration</p>
                 <input
                   className="csv-input"
@@ -118,8 +118,8 @@ class FileReader extends Component {
                 </button>
               </div>
 
-              {/*------------------------PRODUCT CSV CONTAINER-----------------------*/}
-              <div class="productCSV">
+              {/*-------------------PRODUCT CSV CONTAINER------------------*/}
+              <div className="productCSV">
                 <p>Submit your .csv product file for administration</p>
                 <input
                   className="csv-input"
@@ -135,6 +135,10 @@ class FileReader extends Component {
                 <button className="CSV-btn" onClick={this.importCSV}>
                   {" "}
                   Upload now!
+                </button>
+                <button className="ProductCSV-btn" onClick={this.importCSV}>
+                  {" "}
+                  Go to E-Store
                 </button>
               </div>
             </div>
