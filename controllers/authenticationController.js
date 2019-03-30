@@ -1,55 +1,49 @@
-const db = require("../models");
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const passport = require('passport');
-const router = require("express").Router();
+const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 // const JWT_SECRET = process.env.JWT_SECRET || "key";
 // const router = express.Router();
 
 module.exports = {
-    login: function (req, res) {
-        // We tell passport to run the local strategy for user login
-        passport.authenticate("local", { session: false }, (err, user, info) => {
-            if (err || !user) {
-                return res.status(400).json({
-                    message: info,
-                    user: user
-                });
-            }
+  login: function(req, res) {
+    // We tell passport to run the local strategy for user login
+    passport.authenticate("local", { session: false }, (err, user, info) => {
+      if (err || !user) {
+        return res.status(400).json({
+          message: info,
+          user: user
+        });
+      }
 
-            // After a successful login, we serialize the user into a JSON web token and send it back
-            // to the client
-            const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET);
-            return res.json({ user, token });
-        })(req, res);
-    },
-    register: function (req, res) {
-        db.User
-            .create(req.body)
-            .then(user => {
-                if (!user) {
-                    return res.status(400).json({
-                        message: "Something went wrong",
-                        user: user
-                    });
-                }
+      // After a successful login, we serialize the user into a JSON web token and send it back
+      // to the client
+      const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET);
+      return res.json({ user, token });
+    })(req, res);
+  },
+  register: function(req, res) {
+    passport.authenticate("local", { session: false }, (err, user, info) => {
+      if (err || !user) {
+        return res.status(400).json({
+          message: info,
+          user: user
+        });
+      }
 
-                // After a successful register, we serialize the user into a JSON web token and send it back
-                // to the client
-                const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET);
-                return res.json({ user, token });
-            })
-            .catch(err => {
-                res.status(422).json(err)
-            });
-    },
-    logout: function (req, res) {
-        req.logout();
-        res.redirect("/");
-    }
+      // After a successful register, we serialize the user into a JSON web token and send it back
+      // to the client
+      const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET);
+      return res.json({ user, token });
+    })(req, res);
+    //.catch(err => {
+    // res.status(422).json(err);
+    //});
+  },
+  logout: function(req, res) {
+    req.logout();
+    res.redirect("/");
+  }
 };
-
 
 //--------------------------Segundo Intento-----------------------------------//
 
@@ -79,7 +73,6 @@ module.exports = {
 
 // });
 
-
 // module.exports = router;
 
 //---------------------Primer Intento------------------------------//
@@ -101,7 +94,6 @@ module.exports = {
 // //     req.logout();
 // //     res.redirect("/");
 // // })
-
 
 // //Prepare the file to output our router
 // module.exports = router;

@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import API from "../../utils/API";
+import Store from "../../utils/Store";
 
 class SigninModal extends React.Component {
   static propTypes = {
@@ -17,6 +18,7 @@ class SigninModal extends React.Component {
     this.state = {
       firstName: "",
       lastName: "",
+      planType: "",
       email: "",
       password: ""
     };
@@ -28,6 +30,9 @@ class SigninModal extends React.Component {
     const name = event.target.name;
 
     if (name === "password" && value.length > 15) {
+      return;
+    }
+    if (name === "none" && value === "--") {
       return;
     }
 
@@ -43,6 +48,7 @@ class SigninModal extends React.Component {
 
     const firstName = this.state.firstName.trim();
     const lastName = this.state.lastName.trim();
+    const planType = this.state.planType.trim();
     const email = this.state.email.trim();
     const password = this.state.password.trim();
 
@@ -50,11 +56,20 @@ class SigninModal extends React.Component {
       API.saveUser({
         firstName,
         lastName,
+        planType,
         email,
         password
       }).then(() => {
-        this.props.history.push("/userIndex");
-        this.props.closeModal();
+        API.register({
+          email: this.state.email,
+          password: this.state.password
+        })
+          .then(response => {
+            Store.set("userData", response.data);
+            this.props.history.push("/userIndex");
+            this.props.closeModal();
+          })
+          .catch(err => console.log(err));
       });
     }
   };
@@ -123,14 +138,19 @@ class SigninModal extends React.Component {
                 type="radio"
                 value="Free"
              />*/}
-              <select name="plan">
+              <select
+                name="planType"
+                value={this.state.planType}
+                onChange={this.handleInputChange}
+              >
+                <option value="none">--</option>
                 <option value="free">Free</option>
                 <option value="comercial">Comercial</option>
               </select>
               <br />
 
               <label htmlFor="email">
-                <b>User Name</b>
+                <b>Email</b>
               </label>
               <input
                 value={this.state.email}

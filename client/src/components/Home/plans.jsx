@@ -1,8 +1,23 @@
 import React from "react";
 import "../../styles/plans.css";
 import Card from "react-bootstrap/Card";
+import SigninModal from "../Modals/SigninModal";
 
 class Plans extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showSigninModal: false
+    };
+  }
+
+  toggleModal = modal => {
+    this.setState({
+      [modal]: !this.state[modal]
+    });
+  };
+
   render() {
     return (
       <div className="plans-container">
@@ -21,7 +36,14 @@ class Plans extends React.Component {
             <p>Basic Access</p>
             <p>Free Updates</p>
             <hr />
-            <div className="plan-btn">SIGN UP NOW</div>
+            <button
+              className="plan-btn"
+              onClick={() => {
+                this.toggleModal("showSigninModal");
+              }}
+            >
+              SIGN UP NOW
+            </button>
           </div>
         </Card>
         <Card body>
@@ -40,7 +62,14 @@ class Plans extends React.Component {
             <p>Free Updates</p>
             <p>Cloud Data Backup</p>
             <hr />
-            <div className="plan-btn">SIGN UP NOW</div>
+            <button
+              className="plan-btn"
+              onClick={() => {
+                this.toggleModal("showSigninModal");
+              }}
+            >
+              SIGN UP NOW
+            </button>
           </div>
         </Card>
         <Card body>
@@ -59,9 +88,23 @@ class Plans extends React.Component {
             <p>Data Analitics and Statistics</p>
             <p>Graphic Information Display</p>
             <hr />
-            <div className="plan-btn">SIGN UP NOW</div>
+            <button
+              className="plan-btn"
+              onClick={() => {
+                this.toggleModal("showSigninModal");
+              }}
+            >
+              SIGN UP NOW
+            </button>
           </div>
         </Card>
+        {this.state.showSigninModal ? (
+          <SigninModal
+            closeModal={() => {
+              this.toggleModal("showSigninModal");
+            }}
+          />
+        ) : null}
       </div>
     );
   }
