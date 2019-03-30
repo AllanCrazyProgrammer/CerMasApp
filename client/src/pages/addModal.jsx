@@ -3,13 +3,14 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import API from "../utils/API"
-import modalCss from "./"
 
 
 class AddModal extends React.Component {
     state = {
         items: []
     };
+
+
     constructor(props, context) {
         super(props, context);
 
@@ -29,15 +30,17 @@ class AddModal extends React.Component {
 
     onChange = (event) => {
         this.setState({
-            [event.target.name]: event.target.value
+            value: event.target.value
         });
     }
 
-    newUser = () => {
 
+
+    newUser = (e) => {
+        e.preventDefault()
         this.postAlumnos()
         this.handleClose()
-        window.location.reload(true);
+        // window.location.reload(true);
     }
 
     componentDidMount() {
@@ -63,28 +66,24 @@ class AddModal extends React.Component {
 
 
     postAlumnos = () => {
-        var alumno = this.state.alumno
-        var edad = this.state.edad
-        var direccion = this.state.direccion
-        var curp = this.state.curp
-        var enfermedad = this.state.enfermedad
+        debugger;
+        var items = this.state.value
+        console.log(items)
+        API.saveCSV({ ...this.state })
 
 
-
-
-        API.saveAlumno({ ...this.state })
             .then(res => {
+                console.log(res.data)
                 this.setState({
-                    alumno: alumno,
-                    edad: edad,
-                    direccion: direccion,
-                    curp: curp,
-                    enfermedad: enfermedad
+                    items: this.state.items
+
                 })
             })
             .catch(err =>
 
                 console.log("FALLANDO" + err));
+        console.log(items)
+
     };
 
     render() {
@@ -100,7 +99,7 @@ class AddModal extends React.Component {
             return (
                 <>
                     <Form.Label key={key}>{key}</Form.Label>
-                    <Form.Control value={key} onChange={this.onChange} type="input" placeholder={key} name={key} />
+                    <Form.Control onChange={this.onChange} type="input" placeholder={key} name={key} />
                 </>
             )
         });
@@ -109,7 +108,7 @@ class AddModal extends React.Component {
         return (
             <>
                 <Button variant="primary" onClick={this.handleShow}>
-                    Add                </Button>
+                    Add </Button>
 
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
