@@ -29,15 +29,11 @@ export default {
     return axios.post("/api/userIndex", csvData);
   },
 
-  getOneCSV: function(id) {
-    return axios.get("/api/userIndex/" + id);
-  },
-
   getCSV: function(csvData) {
     return axios.get("/api/userIndex", csvData);
   },
 
-  savePopulate: function (populateData) {
+  savePopulate: function(populateData) {
     return axios.post("/api/populateduser", populateData);
   },
 
@@ -60,29 +56,34 @@ export default {
     return axios.post("/api/authentication/login", loginData);
   },
 
-  logout: function () {
+  logout: function() {
     return axios.get("/api/authentication/logout");
   },
 
   //---------PRODUCTS---------------
-  getProducts: function (productsData) {
+  getProducts: function(productsData) {
     return axios.get("/api/userIndex/products", productsData);
   },
 
   //-----------PAYPAL------------------------
-  checkout: function (checkoutData) {
+  checkout: function(checkoutData) {
     return axios.get("/api/paypal/pay", checkoutData);
   },
 
-  payment: function (checkoutData) {
+  payment: function(checkoutData) {
     return axios.post("/api/paypal/pay", checkoutData);
   },
 
-  success: function (checkoutData) {
+  success: function(checkoutData) {
     return axios.get("/api/paypal/sucess", checkoutData);
   },
 
-  cancel: function (checkoutData) {
+  cancel: function(checkoutData) {
     return axios.get("/api/paypal/cancel", checkoutData);
   },
+
+  //-----------------Render Table--------------
+  getOneTable: function(tableData) {
+    return axios.post("/api/table", tableData);
+  }
 };

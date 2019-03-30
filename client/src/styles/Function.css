@@ -19,6 +19,12 @@
   background-color: #f05a28;
 }
 
+.functionAddBtn:active {
+  color: white !important;
+  background-color: #f05a28;
+  border-color: #a8330c;
+}
+
 .functionGetAllBtn {
   width: auto;
   border-radius: 0.3rem;
@@ -40,6 +46,12 @@
   background-color: #f05a28;
 }
 
+.functionGetAllBtn:active {
+  color: white !important;
+  background-color: #f05a28;
+  border-color: #a8330c;
+}
+
 .table {
   background-color: #f05a28;
   color: #000;
@@ -48,9 +60,11 @@
   width: 90%;
   border: 0.2rem solid #f05a28 !important;
   border-collapse: initial;
+  padding: 0.8rem;
 }
 
-.table th {
+.table th,
+td {
   border: 0.2rem solid #000000 !important;
 }
 
