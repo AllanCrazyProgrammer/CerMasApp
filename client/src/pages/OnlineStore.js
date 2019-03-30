@@ -1,13 +1,10 @@
 import React from "react";
-import StoreSetup from "../components/StoreSetup";
+import StoreSetup from "../components/StoreSetup/index";
+import "../styles/plans.css";
 
 class OnlineStore extends React.Component {
   render() {
-    return (
-      <div className="Onlinestore">
-        <StoreSetup />
-      </div>
-    );
+    return <StoreSetup />;
   }
 }
 

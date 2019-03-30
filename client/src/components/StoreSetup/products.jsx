@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import API from "../../utils/API";
 
-class Products extends React.Component {
+class ProductsCard extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
@@ -45,8 +45,8 @@ class Products extends React.Component {
     if (this.areInputsValid()) {
       // console.log(this.state);
       API.checkout({})
-        .then((response) => {
-          this.props.history.push('/userIndex');
+        .then(response => {
+          this.props.history.push("/userIndex");
           this.props.closeModal();
         })
         .catch(err => console.log(err));
@@ -79,11 +79,6 @@ class Products extends React.Component {
             <li>
               <strong>Manufacturer:</strong> {this.props.manufacturer}
             </li>
-            <li>
-              <form action="/paypal" method="post">
-                <input type="submit" value="Buy" className="buy-btn" onClick={this.props.handleFormPaypal}></input>
-              </form>
-            </li>
           </ul>
         </div>
       </div>
@@ -91,4 +86,4 @@ class Products extends React.Component {
   }
 }
 
-export default Products;
+export default ProductsCard;

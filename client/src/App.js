@@ -9,7 +9,7 @@ import Foot from "./components/Footer";
 import NoMatch from "./pages/NoMatch";
 import UserIndex from "./components/UserIndex";
 import AdminTools from "./components/AdminFunctions/adminTools";
-import OnlineStore from "./components/StoreSetup";
+import OnlineStore from "./pages/OnlineStore";
 import "./App.css";
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
             <Route exact path="/newexample" component={ExampleForm} />
             <Route path="/userIndex" component={UserIndex} />
             <Route path="/userIndex/tools" component={AdminTools} />
-            <Route path="/userIndex/products" component={OnlineStore} />
+            <Route path="/store" component={OnlineStore} />
             <Route component={NoMatch} />
           </Switch>
           <Foot />

@@ -4,6 +4,7 @@ import Papa from "papaparse";
 import "../../styles/CSV.css";
 import API from "../../utils/API";
 import Store from "../../utils/Store";
+import { Link } from "react-router-dom";
 
 class FileReader extends Component {
   constructor() {
@@ -96,7 +97,7 @@ class FileReader extends Component {
               <hr />
               <p>
                 Remember that CER+ depends on the reliability of your .CSV to
-                work correctly.
+                work correctly
               </p>
               {/*-----------------NORMAL CSV CONTAINER-------------------*/}
               <div className="firstCSV">
@@ -117,7 +118,7 @@ class FileReader extends Component {
                   Upload now!
                 </button>
               </div>
-
+              <p />
               {/*-------------------PRODUCT CSV CONTAINER------------------*/}
               <div className="productCSV">
                 <p>Submit your .csv product file for administration</p>
@@ -136,9 +137,8 @@ class FileReader extends Component {
                   {" "}
                   Upload now!
                 </button>
-                <button className="ProductCSV-btn" onClick={this.importCSV}>
-                  {" "}
-                  Go to E-Store
+                <button className="ProductCSV-btn">
+                  <Link to="/store">Go to E-Store</Link>
                 </button>
               </div>
             </div>
